@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package taskactivities;
+
+service TaskActivities {
+  rpc syncProjects(SyncProjectsRequest) returns (SyncProjectsResponse) {}
+  rpc submitWork(SubmitWorkRequest) returns (SubmitWorkResponse) {}
+}
+
+message SyncProjectsRequest {
+  repeated string projectIds = 1;
+}
+
+message SyncProjectsResponse {
+  repeated string syncedProjectIds = 1;
+}
+
+message SubmitWorkRequest {
+  string projectId = 1;
+  string taskId = 2;
+  string userId = 3;
+}
+
+message SubmitWorkResponse {
+  string projectId = 1;
+  string taskId = 2;
+  string userId = 3;
+  string status = 4;
+}

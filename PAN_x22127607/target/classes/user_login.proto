@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package userlogin;
+
+// Define TaskResponse message
+message TaskResponse {
+  // Define fields for TaskResponse
+  string task_id = 1;
+  string task_name = 2;
+  // Add more fields as needed
+}
+
+service UserLogin {
+  rpc GetUserTasks(GetUserTasksRequest) returns (GetUserTasksResponse) {}
+  rpc GetExecutionHistory(GetExecutionHistoryRequest) returns (GetExecutionHistoryResponse) {}
+  rpc GetProjectsToRun(GetProjectsToRunRequest) returns (GetProjectsToRunResponse) {}
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
+  rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {}
+  rpc GetAccountInfo(GetAccountInfoRequest) returns (GetAccountInfoResponse) {}
+}
+
+message GetUserTasksRequest {
+  string user_id = 1;
+}
+
+message GetUserTasksResponse {
+  repeated TaskResponse tasks = 1;
+}
+
+message GetExecutionHistoryRequest {
+  string project_id = 1;
+}
+
+message GetExecutionHistoryResponse {
+  string project_id = 1;
+  repeated TaskResponse execution_history = 2;
+}
+
+message GetProjectsToRunRequest {
+  string user_id = 1;
+}
+
+message GetProjectsToRunResponse {
+  repeated string project_ids = 1;
+}
+
+message CreateAccountRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message CreateAccountResponse {
+  string account_id = 1;
+}
+
+message DeleteAccountRequest {
+  string account_id = 1;
+}
+
+message DeleteAccountResponse {
+  bool success = 1;
+}
+
+message GetAccountInfoRequest {
+  string account_id = 1;
+}
+
+message GetAccountInfoResponse {
+  string username = 1;
+  repeated string project_ids = 2;
+}
+
+

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package taskmonitoring;
+
+service TaskMonitoring {
+  rpc createTask(TaskRequest) returns (TaskResponse) {}
+  rpc deleteTask(TaskRequest) returns (TaskResponse) {}
+  rpc queryTasks(QueryTasksRequest) returns (QueryTasksResponse) {}
+  rpc queryProjectStatus(ProjectStatusRequest) returns (ProjectStatusResponse) {}
+  rpc queryExecutionHistory(ExecutionHistoryRequest) returns (ExecutionHistoryResponse) {}
+  rpc retryFailedTasks(RetryFailedTasksRequest) returns (RetryFailedTasksResponse) {}
+}
+
+message TaskRequest {
+  string taskId = 1;
+  string taskName = 2;
+  string userId = 3;
+}
+
+message TaskResponse {
+  string taskId = 1;
+  string taskName = 2;
+  string userId = 3;
+  string status = 4;
+}
+
+message QueryTasksRequest {
+  string userId = 1;
+}
+
+message QueryTasksResponse {
+  repeated TaskResponse tasks = 1;
+}
+
+message ProjectStatusRequest {
+  string projectId = 1;
+}
+
+message ProjectStatusResponse {
+  string projectId = 1;
+  string status = 2;
+}
+
+message ExecutionHistoryRequest {
+  string projectId = 1;
+}
+
+message ExecutionHistoryResponse {
+  string projectId = 1;
+  repeated TaskResponse executionHistory = 2;
+}
+
+message RetryFailedTasksRequest {
+  string userId = 1;
+}
+
+message RetryFailedTasksResponse {
+  repeated TaskResponse retriedTasks = 1;
+}
